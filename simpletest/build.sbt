@@ -1,0 +1,3 @@
+// GENERATED FILE USING THE CHAT OVERFLOW PLUGIN FRAMEWORK
+name := "simpletest"
+version := "1.0"
