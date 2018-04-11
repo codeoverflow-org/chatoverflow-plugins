@@ -1,17 +1,11 @@
 import org.codeoverflow.chatoverflow.api.plugin.{Plugin, PluginManager}
 
-class simpletestPlugin extends Plugin {
-
-  private var manager: PluginManager = _
+class simpletestPlugin(manager: PluginManager) extends Plugin {
 
   override def start(): Unit = {
     println("Started successfully!")
-    println(s"Dummy message is: '${
-      if (simpletest.manager.isDefined)
-        simpletest.manager.get.getDummyMessage
-      else
-        "Not defined!"
-    }'")
+    println(s"Dummy message is:${manager.getDummyMessage}")
   }
 
+  override def getDependenciesOrWhatEver: Array[String] = Array("")
 }

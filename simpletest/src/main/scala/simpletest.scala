@@ -41,18 +41,5 @@ class simpletest extends Pluggable {
     *
     * @return the plugin implementation of the plugin project
     */
-  override def getPlugin: Plugin = new simpletestPlugin
-
-  /**
-    * Sets the plugin manager for communication. Should only be used after testing the api version number!
-    *
-    * @param manager the manager implementation of the framework
-    */
-  override def setPluginManager(manager: PluginManager): Unit = simpletest.manager = Some(manager)
-}
-
-object simpletest {
-
-  var manager: Option[PluginManager] = None
-
+  override def getPlugin(manager: PluginManager): Plugin = new simpletestPlugin(manager)
 }
