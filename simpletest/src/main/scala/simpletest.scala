@@ -12,5 +12,5 @@ class simpletest extends Pluggable {
 
   override def getMinorAPIVersion: Int = 0
 
-  override def getPlugin(manager: PluginManager): Plugin = new simpletestPlugin(manager)
+  override def createNewPluginInstance(manager: PluginManager): Plugin = new simpletestPlugin(manager)
 }

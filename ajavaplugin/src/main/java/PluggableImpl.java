@@ -29,7 +29,7 @@ public class PluggableImpl implements Pluggable {
     }
 
     @Override
-    public Plugin getPlugin(PluginManager manager) {
+    public Plugin createNewPluginInstance(PluginManager manager) {
         return new PluginImpl();
     }
 }
