@@ -1,4 +1,5 @@
 import org.codeoverflow.chatoverflow.api.plugin.Plugin;
+import org.codeoverflow.chatoverflow.api.plugin.configuration.Configuration;
 
 public class PluginImpl implements Plugin {
     @Override
@@ -7,7 +8,8 @@ public class PluginImpl implements Plugin {
     }
 
     @Override
-    public String[] getDependenciesOrWhatEver() {
-        return new String[0];
+    public Configuration getRequirements() {
+        return null;
     }
+
 }
