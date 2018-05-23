@@ -14,7 +14,11 @@ class simpletestPlugin(manager: PluginManager) extends Plugin {
     println(s"Dummy message is:${manager.getDummyMessage}")
 
     val chatInput = config.getInputs.get("Twitch Channel").getSource.asInstanceOf[TwitchChatInput]
-    // chatInput.gimmeSomeMessagasJo
+    chatInput.registerMessageHandler(msg => println(msg))
+
+    while (true) {
+      Thread.sleep(10)
+    }
   }
 
   override def getRequirements: Configuration = config
