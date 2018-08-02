@@ -1,4 +1,4 @@
-import org.codeoverflow.chatoverflow.api.plugin.configuration.Configuration
+import org.codeoverflow.chatoverflow.api.plugin.configuration.Requirements
 import org.codeoverflow.chatoverflow.api.plugin.{Pluggable, Plugin, PluginManager}
 
 class anothertestMainClass extends Pluggable {
@@ -19,6 +19,6 @@ class anothertestMainClass extends Pluggable {
       println("Started another test!")
     }
 
-    override def getRequirements: Configuration = ???
+    override def getRequirements: Requirements = ???
   }
 }
