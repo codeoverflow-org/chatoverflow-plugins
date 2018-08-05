@@ -5,7 +5,7 @@ class simpletestPlugin(manager: PluginManager) extends Plugin {
 
   private val require = new Requirements
   private val twitchChatInput = require.input.twitchChat("reqTwitch", "A twitch channel", false)
-  private val nameToSayHelloTo = require.parameter.string("reqHello", "Your name", true)
+  private val nameToSayHelloTo = require.parameter.string("reqHello", "Your name", false)
 
   override def start(): Unit = {
     println("Started successfully!")
