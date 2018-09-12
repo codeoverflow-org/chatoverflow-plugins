@@ -1,5 +1,4 @@
-import org.codeoverflow.chatoverflow.api.plugin.configuration.Requirements
-import org.codeoverflow.chatoverflow.api.plugin.{Pluggable, Plugin, PluginManager}
+import org.codeoverflow.chatoverflow.api.plugin.{Pluggable, Plugin, PluginImpl, PluginManager}
 
 class anothertestMainClass extends Pluggable {
 
@@ -13,12 +12,11 @@ class anothertestMainClass extends Pluggable {
 
   override def getMinorAPIVersion: Int = 0
 
-  override def createNewPluginInstance(manager: PluginManager): Plugin = new Plugin {
+  override def createNewPluginInstance(manager: PluginManager): Plugin = new PluginImpl {
+    override def setup(): Unit = println("Setup!")
 
-    override def start(): Unit = {
-      println("Started another test!")
-    }
+    override def loop(): Unit = println("Loop!")
 
-    override def getRequirements: Requirements = ???
+    override def shutdown(): Unit = println("Shutdown!")
   }
 }
