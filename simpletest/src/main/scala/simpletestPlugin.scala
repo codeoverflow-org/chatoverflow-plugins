@@ -1,24 +1,25 @@
-import org.codeoverflow.chatoverflow.api.plugin.configuration.Requirements
-import org.codeoverflow.chatoverflow.api.plugin.{Plugin, PluginManager}
+import org.codeoverflow.chatoverflow.api.plugin.{PluginImpl, PluginManager}
 
-class simpletestPlugin(manager: PluginManager) extends Plugin {
+class simpletestPlugin(manager: PluginManager) extends PluginImpl {
 
-  private val require = new Requirements
-  private val twitchChatInput = require.input.twitchChat("reqTwitch", "A twitch channel", false)
-  private val nameToSayHelloTo = require.parameter.string("reqHello", "Your name", false)
+  private val twitchChatInputReq = require.input.twitchChat("reqTwitch", "A twitch channel", false)
+  private val nameToSayHelloToReq = require.parameter.string("reqHello", "Your name", false)
+  loopInterval = 1000
 
-  override def start(): Unit = {
+  override def setup(): Unit = {
     println("Started successfully!")
     println(s"Dummy message is:${manager.getDummyMessage}")
 
-    twitchChatInput.getValue.registerMessageHandler(msg => println(msg))
+    twitchChatInputReq.get.registerMessageHandler(msg => println(msg))
 
-    println(s"Hello ${nameToSayHelloTo.getValue}!")
-
-    while (true) {
-      Thread.sleep(10)
-    }
+    println(s"Hello ${nameToSayHelloToReq.get}!")
   }
 
-  override def getRequirements: Requirements = require
+  override def loop(): Unit = {
+    println("Loop!")
+  }
+
+  override def shutdown(): Unit = {
+
+  }
 }
