@@ -30,6 +30,6 @@ public class PluggableImpl implements Pluggable {
 
     @Override
     public Plugin createNewPluginInstance(PluginManager manager) {
-        return new AJavaPluginImpl();
+        return new AJavaPluginImpl(manager);
     }
 }
