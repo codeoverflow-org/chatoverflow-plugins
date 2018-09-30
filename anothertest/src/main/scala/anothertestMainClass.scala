@@ -12,7 +12,7 @@ class anothertestMainClass extends Pluggable {
 
   override def getMinorAPIVersion: Int = 0
 
-  override def createNewPluginInstance(manager: PluginManager): Plugin = new PluginImpl {
+  override def createNewPluginInstance(manager: PluginManager): Plugin = new PluginImpl(manager) {
     override def setup(): Unit = println("Setup!")
 
     override def loop(): Unit = println("Loop!")
