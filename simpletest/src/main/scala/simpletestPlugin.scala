@@ -12,7 +12,7 @@ class simpletestPlugin(manager: PluginManager) extends PluginImpl(manager) {
     log("Hello!")
     log("Whats up?")
 
-    log(twitchAPIInputReq.get.getSubscribers("skate702"))
+    log(twitchAPIInputReq.get.getUser("skate702").toString)
 
     //twitchChatInputReq.get.registerMessageHandler(msg => println(msg))
 
