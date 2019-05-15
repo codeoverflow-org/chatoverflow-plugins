@@ -1,0 +1,4 @@
+// GENERATED FILE USING THE CHAT OVERFLOW PLUGIN FRAMEWORK
+
+name := "discordTest"
+version := "0.1"

@@ -6,8 +6,11 @@ class discordTestPlugin(manager: PluginManager) extends PluginImpl(manager) {
 
   private val discordInputReq = require.input.discordChat("reqDiscordIn", "Discord input", false)
   private val discordOutputReq = require.output.discordChat("reqDiscordOut", "Discord output", false)
+  private val discordChannelReq = require.parameter.string("reqDiscordChannel", "The id of the channel to which the bot should connect", false)
 
   override def setup(): Unit = {
+    discordInputReq.get.setChannel(discordChannelReq.get.get)
+    discordOutputReq.get.setChannel(discordChannelReq.get.get)
     println(s"Input connected to channel ${discordInputReq.get().getChannelId}")
     println(s"Output connected to channel ${discordOutputReq.get().getChannelId}")
     discordInputReq.get.registerMessageHandler(onMessage)
