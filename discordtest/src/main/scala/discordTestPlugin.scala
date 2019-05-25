@@ -1,5 +1,9 @@
-import org.codeoverflow.chatoverflow.api.io.dto.chat.discord.DiscordChatMessage
+import java.awt.Color
+import java.io.File
+
+import org.codeoverflow.chatoverflow.api.io.dto.chat.discord.{DiscordChatMessage, DiscordEmbed, DiscordReaction}
 import org.codeoverflow.chatoverflow.api.plugin.{PluginImpl, PluginManager}
+
 import scala.collection.JavaConverters._
 
 class discordTestPlugin(manager: PluginManager) extends PluginImpl(manager) {
@@ -17,6 +21,13 @@ class discordTestPlugin(manager: PluginManager) extends PluginImpl(manager) {
     discordInputReq.get.registerMessageEditHandler(onMessageEdit)
     discordInputReq.get.registerMessageDeleteHandler(onMessageDelete)
     discordOutputReq.get.sendChatMessage("Hey I'm working! \uD83C\uDF89")
+    discordOutputReq.get().sendFile("../config/config.xml")
+    discordOutputReq.get().sendFile("allowed_file.png")
+    discordOutputReq.get().sendChatMessage(DiscordEmbed.Builder()
+      .withColor(Color.RED)
+      .withDescription("test")
+      .withAuthor("skateShiny", null, "https://cdn.discordapp.com/emojis/496389587329875981.png?v=1")
+      .build())
     println("Startet succesfully")
   }
 
