@@ -1,4 +1,4 @@
 // GENERATED FILE USING THE CHAT OVERFLOW PLUGIN FRAMEWORK
 
-name := "discordTest"
+name := "testall"
 version := "0.1"
