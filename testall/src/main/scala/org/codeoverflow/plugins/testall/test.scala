@@ -2,6 +2,15 @@ package org.codeoverflow.plugins.testall
 
 import org.codeoverflow.chatoverflow.api.plugin.configuration.Requirement
 
+/**
+  * Used for testing a connector.
+  *
+  * Pass all requirements required for this test and implement your tests in the `setup()`, `loop()` and `shutdown()` functions.
+  * Also make sure to add the test in the `testallPlugin` class.
+  *
+  * @param plugin the testallPlugins instance (required for logging)
+  * @param requirements the requirements that are used by this test
+  */
 abstract class test(private val plugin: testallPlugin, val requirements : Requirement[_]*) {
 
   /**
@@ -42,6 +51,6 @@ abstract class test(private val plugin: testallPlugin, val requirements : Requir
     *
     * @param message the message to show
     */
-  protected final def log(message: String): Unit = plugin.getManager.log(message)
+  protected final def log(message: String): Unit = plugin.getManager.log(s"[$name] $message")
 
 }
