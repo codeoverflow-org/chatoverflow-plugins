@@ -11,6 +11,10 @@ import org.codeoverflow.plugins.testall.{test, testallPlugin}
 
 import scala.collection.JavaConverters._
 
+/**
+  * Test for the discord service, logs edited and deleted messages, tests sending of messages, embeds and files,
+  * allows listing the recent messages with /message command
+  */
 class discordtest(val plugin: testallPlugin,
                   val in: Requirement[DiscordChatInput],
                   val out: Requirement[DiscordChatOutput],
@@ -34,7 +38,7 @@ class discordtest(val plugin: testallPlugin,
       .withDescription("test")
       .withAuthor("skateShiny", null, "https://cdn.discordapp.com/emojis/496389587329875981.png?v=1")
       .build())
-    log(s"$name started successfully")
+    log("Started successfully")
   }
 
   def onMessage(message: DiscordChatMessage): Unit = {
@@ -49,14 +53,14 @@ class discordtest(val plugin: testallPlugin,
 
 
   def onMessageEdit(oldMessage: DiscordChatMessage, newMessage: DiscordChatMessage): Unit = {
-    log(s"$name: Message #${oldMessage.getId} was edited from '$oldMessage' to '$newMessage'")
+    log("Message #${oldMessage.getId} was edited from '$oldMessage' to '$newMessage'")
   }
 
   def onMessageDelete(message: DiscordChatMessage): Unit = {
-    log(s"$name: Message #${message.getId} was deleted  (content: $message)")
+    log("Message #${message.getId} was deleted  (content: $message)")
   }
 
   override def loop(): Unit = {}
 
-  override def shutdown(): Unit = log(s"Stopped $name")
+  override def shutdown(): Unit = log("Stopped")
 }

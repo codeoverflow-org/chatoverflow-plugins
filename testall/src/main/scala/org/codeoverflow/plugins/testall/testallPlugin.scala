@@ -1,7 +1,7 @@
 package org.codeoverflow.plugins.testall
 
 import org.codeoverflow.chatoverflow.api.plugin.{PluginImpl, PluginManager}
-import org.codeoverflow.plugins.testall.tests.discordtest
+import org.codeoverflow.plugins.testall.tests.{discordtest, filetest}
 
 
 class testallPlugin(manager: PluginManager) extends PluginImpl(manager) {
@@ -11,7 +11,12 @@ class testallPlugin(manager: PluginManager) extends PluginImpl(manager) {
       require.input.discordChat("reqDiscordIn", "Discord input", true),
       require.output.discordChat("reqDiscordOut", "Discord output", true),
       require.parameter.string("reqDiscordChannel", "The id of the channel to which the bot should connect", true)
+    ),
+    new filetest(this,
+      require.input.file("fileIn", "File input", true),
+      require.output.file("fileOut", "File output", true)
     )
+    //Add more tests here!
   )
 
   private var running = Seq[test]()
