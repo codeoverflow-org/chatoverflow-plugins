@@ -1,3 +1,4 @@
+import org.codeoverflow.chatoverflow.api.io.event.chat.twitch.TwitchChatMessageSendEvent
 import org.codeoverflow.chatoverflow.api.plugin.{PluginImpl, PluginManager}
 
 class simpletestPlugin(manager: PluginManager) extends PluginImpl(manager) {
@@ -13,9 +14,13 @@ class simpletestPlugin(manager: PluginManager) extends PluginImpl(manager) {
     log("Whats up?")
     log("I am new!")
     twitchChatInputReq.get.setChannel(twitchChannelReq.get.get)
-    twitchChatInputReq.get.registerMessageHandler(msg => println(msg))
+    twitchChatInputReq.get.registerEventHandler(onMessage, classOf[TwitchChatMessageSendEvent])
 
     println(s"Hello ${nameToSayHelloToReq.get.get()}!")
+  }
+
+  private def onMessage(event: TwitchChatMessageSendEvent): Unit = {
+    println(event.getMessage)
   }
 
   override def loop(): Unit = {

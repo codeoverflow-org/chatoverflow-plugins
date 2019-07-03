@@ -1,7 +1,7 @@
 import java.awt.Color
-import java.io.File
 
-import org.codeoverflow.chatoverflow.api.io.dto.chat.discord.{DiscordChatMessage, DiscordEmbed, DiscordReaction}
+import org.codeoverflow.chatoverflow.api.io.dto.chat.discord.DiscordEmbed
+import org.codeoverflow.chatoverflow.api.io.event.chat.discord.{DiscordChatMessageDeleteEvent, DiscordChatMessageEditEvent, DiscordChatMessageSendEvent}
 import org.codeoverflow.chatoverflow.api.plugin.{PluginImpl, PluginManager}
 
 import scala.collection.JavaConverters._
@@ -17,9 +17,9 @@ class discordTestPlugin(manager: PluginManager) extends PluginImpl(manager) {
     discordOutputReq.get.setChannel(discordChannelReq.get.get)
     println(s"Input connected to channel ${discordInputReq.get().getChannelId}")
     println(s"Output connected to channel ${discordOutputReq.get().getChannelId}")
-    discordInputReq.get.registerMessageHandler(onMessage)
-    discordInputReq.get.registerMessageEditHandler(onMessageEdit)
-    discordInputReq.get.registerMessageDeleteHandler(onMessageDelete)
+    discordInputReq.get.registerEventHandler(onMessage, classOf[DiscordChatMessageSendEvent])
+    discordInputReq.get.registerEventHandler(onMessageEdit, classOf[DiscordChatMessageEditEvent])
+    discordInputReq.get.registerEventHandler(onMessageDelete, classOf[DiscordChatMessageDeleteEvent])
     discordOutputReq.get.sendChatMessage("Hey I'm working! \uD83C\uDF89")
     discordOutputReq.get().sendFile("../config/config.xml")
     discordOutputReq.get().sendFile("allowed_file.png")
@@ -31,29 +31,29 @@ class discordTestPlugin(manager: PluginManager) extends PluginImpl(manager) {
     println("Startet succesfully")
   }
 
-  override def loop(): Unit = {}
-
-
-  override def shutdown(): Unit = println("Plugin stopped")
-
-  def onMessage(message: DiscordChatMessage): Unit = {
-    if (message.getMessage == "/messages") {
+  def onMessage(event: DiscordChatMessageSendEvent): Unit = {
+    if (event.getMessage.getMessage == "/messages") {
       var s = "**Recent messages:**\n"
-      s += discordInputReq.get.getLastMessages(1000*60).asScala.filter(_.getAuthor.getId != discordTestPlugin.BOT_ID).mkString("\n")
+      s += discordInputReq.get.getLastMessages(1000 * 60).asScala.filter(_.getAuthor.getId != discordTestPlugin.BOT_ID).mkString("\n")
       s += "\n\n**Recent private messages:**\n"
-      s += discordInputReq.get().getLastPrivateMessages(1000*60).asScala.mkString("\n")
-      discordOutputReq.get. sendChatMessage(s)
+      s += discordInputReq.get().getLastPrivateMessages(1000 * 60).asScala.mkString("\n")
+      discordOutputReq.get.sendChatMessage(s)
     }
   }
 
-  def onMessageEdit(oldMessage: DiscordChatMessage, newMessage: DiscordChatMessage): Unit = {
-    println(s"Message #${oldMessage.getId} was edited from '$oldMessage' to '$newMessage'")
+  def onMessageEdit(event: DiscordChatMessageEditEvent): Unit = {
+    println(s"Message #${event.getMessage.getId} was edited from '${event.getOldMessage.toString}' to '${event.getMessage.toString}'")
   }
 
-  def onMessageDelete(message: DiscordChatMessage): Unit = {
-    println(s"Message #${message.getId} was deleted  (content: $message)")
+  def onMessageDelete(message: DiscordChatMessageDeleteEvent): Unit = {
+    println(s"Message #${message.getMessage.getId} was deleted  (content: $message)")
   }
+
+  override def loop(): Unit = {}
+
+  override def shutdown(): Unit = println("Plugin stopped")
 }
+
 object discordTestPlugin {
   val BOT_ID = "572870096356376576"
 }
