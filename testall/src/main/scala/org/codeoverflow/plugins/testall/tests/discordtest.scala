@@ -2,7 +2,8 @@ package org.codeoverflow.plugins.testall.tests
 
 import java.awt.Color
 
-import org.codeoverflow.chatoverflow.api.io.dto.chat.discord.{DiscordChatMessage, DiscordEmbed}
+import org.codeoverflow.chatoverflow.api.io.dto.chat.discord.DiscordEmbed
+import org.codeoverflow.chatoverflow.api.io.event.chat.discord.{DiscordChatMessageDeleteEvent, DiscordChatMessageEditEvent, DiscordChatMessageReceiveEvent}
 import org.codeoverflow.chatoverflow.api.io.input.chat.DiscordChatInput
 import org.codeoverflow.chatoverflow.api.io.output.chat.DiscordChatOutput
 import org.codeoverflow.chatoverflow.api.io.parameter.StringParameter
@@ -18,7 +19,7 @@ import scala.collection.JavaConverters._
 class discordtest(val plugin: testallPlugin,
                   val in: Requirement[DiscordChatInput],
                   val out: Requirement[DiscordChatOutput],
-                  val channel: Requirement[StringParameter]) extends test(plugin, in, out) {
+                  val channel: Requirement[StringParameter]) extends test(plugin, in, out, channel) {
 
   override def name: String = "Discord test"
   
@@ -27,9 +28,9 @@ class discordtest(val plugin: testallPlugin,
     out.get.setChannel(channel.get.get)
     println(s"Input connected to channel ${in.get().getChannelId}")
     println(s"Output connected to channel ${out.get().getChannelId}")
-    in.get.registerMessageHandler(onMessage)
-    in.get.registerMessageEditHandler(onMessageEdit)
-    in.get.registerMessageDeleteHandler(onMessageDelete)
+    in.get.registerEventHandler(onMessage, classOf[DiscordChatMessageReceiveEvent])
+    in.get.registerChatMessageEditEventHandler(onMessageEdit)
+    in.get.registerChatMessageDeleteEventHandler(onMessageDelete)
     out.get.sendChatMessage("Hey I'm working! \uD83C\uDF89")
     out.get().sendFile("../config/config.xml")
     out.get().sendFile("allowed_file.png")
@@ -41,8 +42,8 @@ class discordtest(val plugin: testallPlugin,
     log("Started successfully")
   }
 
-  def onMessage(message: DiscordChatMessage): Unit = {
-    if (message.getMessage == "/messages") {
+  def onMessage(event: DiscordChatMessageReceiveEvent): Unit = {
+    if (event.getMessage.getMessage == "/messages") {
       var s = "**Recent messages:**\n"
       s += in.get.getLastMessages(1000*60).asScala.mkString("\n")
       s += "\n\n**Recent private messages:**\n"
@@ -52,12 +53,12 @@ class discordtest(val plugin: testallPlugin,
   }
 
 
-  def onMessageEdit(oldMessage: DiscordChatMessage, newMessage: DiscordChatMessage): Unit = {
-    log("Message #${oldMessage.getId} was edited from '$oldMessage' to '$newMessage'")
+  def onMessageEdit(event: DiscordChatMessageEditEvent): Unit = {
+    log(s"Message #${event.getMessage.getId} was edited from '${event.getOldMessage.getMessage}' to '${event.getMessage.getMessage}'")
   }
 
-  def onMessageDelete(message: DiscordChatMessage): Unit = {
-    log("Message #${message.getId} was deleted  (content: $message)")
+  def onMessageDelete(event: DiscordChatMessageDeleteEvent): Unit = {
+    log(s"Message #${event.getMessage.getId} was deleted  (content: ${event.getMessage.getMessage})")
   }
 
   override def loop(): Unit = {}

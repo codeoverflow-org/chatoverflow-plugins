@@ -56,5 +56,5 @@ class filetest(val plugin: testallPlugin, val in: Requirement[FileInput], val ou
 
   override def loop(): Unit = {}
 
-  override def shutdown(): Unit = {}
+  override def shutdown(): Unit = log("Stopped")
 }
