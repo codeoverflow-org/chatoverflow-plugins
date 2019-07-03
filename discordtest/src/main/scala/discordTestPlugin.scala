@@ -1,7 +1,7 @@
 import java.awt.Color
 
 import org.codeoverflow.chatoverflow.api.io.dto.chat.discord.DiscordEmbed
-import org.codeoverflow.chatoverflow.api.io.event.chat.discord.{DiscordChatMessageDeleteEvent, DiscordChatMessageEditEvent, DiscordChatMessageSendEvent}
+import org.codeoverflow.chatoverflow.api.io.event.chat.discord.{DiscordChatMessageDeleteEvent, DiscordChatMessageEditEvent, DiscordChatMessageReceiveEvent}
 import org.codeoverflow.chatoverflow.api.plugin.{PluginImpl, PluginManager}
 
 import scala.collection.JavaConverters._
@@ -17,7 +17,7 @@ class discordTestPlugin(manager: PluginManager) extends PluginImpl(manager) {
     discordOutputReq.get.setChannel(discordChannelReq.get.get)
     println(s"Input connected to channel ${discordInputReq.get().getChannelId}")
     println(s"Output connected to channel ${discordOutputReq.get().getChannelId}")
-    discordInputReq.get.registerChatMessageSendEventHandler(onMessage)
+    discordInputReq.get.registerChatMessageReceiveEventHandler(onMessage)
     discordInputReq.get.registerChatMessageEditEventHandler(onMessageEdit)
     discordInputReq.get.registerChatMessageDeleteEventHandler(onMessageDelete)
     discordOutputReq.get.sendChatMessage("Hey I'm working! \uD83C\uDF89")
@@ -31,7 +31,7 @@ class discordTestPlugin(manager: PluginManager) extends PluginImpl(manager) {
     println("Startet succesfully")
   }
 
-  def onMessage(event: DiscordChatMessageSendEvent): Unit = {
+  def onMessage(event: DiscordChatMessageReceiveEvent): Unit = {
     if (event.getMessage.getMessage == "/messages") {
       var s = "**Recent messages:**\n"
       s += discordInputReq.get.getLastMessages(1000 * 60).asScala.filter(_.getAuthor.getId != discordTestPlugin.BOT_ID).mkString("\n")
