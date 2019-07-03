@@ -14,7 +14,7 @@ class simpletestPlugin(manager: PluginManager) extends PluginImpl(manager) {
     log("Whats up?")
     log("I am new!")
     twitchChatInputReq.get.setChannel(twitchChannelReq.get.get)
-    twitchChatInputReq.get.registerEventHandler(onMessage, classOf[TwitchChatMessageSendEvent])
+    twitchChatInputReq.get.registerChatMessageSendEventHandler(onMessage)
 
     println(s"Hello ${nameToSayHelloToReq.get.get()}!")
   }
