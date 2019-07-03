@@ -1,4 +1,0 @@
-// GENERATED FILE USING THE CHAT OVERFLOW PLUGIN FRAMEWORK
-
-name := "another test"
-version := "2.3"

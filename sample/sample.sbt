@@ -1,4 +1,4 @@
 // GENERATED FILE USING THE CHAT OVERFLOW PLUGIN FRAMEWORK
 
-name := "A Java plugin"
-version := "1.0"
+name := "simple"
+version := "0.1"
