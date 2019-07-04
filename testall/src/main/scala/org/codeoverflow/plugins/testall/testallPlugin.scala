@@ -1,7 +1,7 @@
 package org.codeoverflow.plugins.testall
 
 import org.codeoverflow.chatoverflow.api.plugin.{PluginImpl, PluginManager}
-import org.codeoverflow.plugins.testall.tests.{discordtest, filetest, serialtest, twitchtest}
+import org.codeoverflow.plugins.testall.tests.{discordtest, filetest, serialtest, tipeeestreamtest, twitchtest}
 
 
 class testallPlugin(manager: PluginManager) extends PluginImpl(manager) {
@@ -23,6 +23,9 @@ class testallPlugin(manager: PluginManager) extends PluginImpl(manager) {
     new twitchtest(this,
       require.input.twitchChat("twitchIn", "Twitch chat input #skate702", true),
       require.output.twitchChat("twitchOut", "Twitch chat output #skate702", true)
+    ),
+    new tipeeestreamtest(this,
+      require.input.tipeeeStream("tipeeestreamEvents", "TipeeeStream event input", true)
     )
     //Add more tests here!
   )
