@@ -9,7 +9,7 @@ class testall extends Pluggable {
 
   override def getDescription: String = "A plugin to simplify testing of all services"
 
-  override def getMajorAPIVersion: Int = 1
+  override def getMajorAPIVersion: Int = 2
 
   override def getMinorAPIVersion: Int = 0
 
