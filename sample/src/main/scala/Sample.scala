@@ -27,7 +27,7 @@ class Sample extends Pluggable {
     *
     * @return a version number
     */
-  override def getMajorAPIVersion: Int = 2
+  override def getMajorAPIVersion: Int = 3
 
   /**
     * Returns the newest minor version of the api, where the plugin was successfully tested!

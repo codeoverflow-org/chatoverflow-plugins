@@ -1,5 +1,4 @@
 import org.codeoverflow.chatoverflow.api.plugin.{Pluggable, Plugin, PluginManager}
-import org.codeoverflow.plugins.testall.testallPlugin
 
 class testall extends Pluggable {
 
@@ -9,7 +8,7 @@ class testall extends Pluggable {
 
   override def getDescription: String = "A plugin to simplify testing of all services"
 
-  override def getMajorAPIVersion: Int = 2
+  override def getMajorAPIVersion: Int = 3
 
   override def getMinorAPIVersion: Int = 0
 
