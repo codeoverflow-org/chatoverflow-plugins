@@ -1,4 +1,5 @@
 import org.codeoverflow.chatoverflow.api.plugin.{Pluggable, Plugin, PluginManager}
+import org.codeoverflow.plugins.testall.testallPlugin
 
 class testall extends Pluggable {
 
