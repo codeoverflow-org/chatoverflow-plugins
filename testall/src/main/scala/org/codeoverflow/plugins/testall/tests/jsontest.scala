@@ -7,7 +7,7 @@ import org.json4s.jackson.JsonMethods._
 
 class jsontest(private val plugin: testallPlugin) extends test(plugin) {
 
-  private implicit val formats = DefaultFormats
+  private implicit val formats: DefaultFormats.type = DefaultFormats
 
   private val JSON_STRING =
     """{
@@ -20,7 +20,7 @@ class jsontest(private val plugin: testallPlugin) extends test(plugin) {
       | }
       |}""".stripMargin
 
-  private val JSON_OBJECT: JObject = ("testNo1" -> "string") ~
+  private def JSON_OBJECT: JObject = ("testNo1" -> "string") ~
     ("test_no_2" -> 4) ~
     ("test3" -> List(1, 2, 3)) ~
     ("test4" -> ("name" -> "skate702") ~ ("followers" -> 3))
@@ -33,6 +33,13 @@ class jsontest(private val plugin: testallPlugin) extends test(plugin) {
     try {
       parse(JSON_STRING)
       log ("Parsed")
+    } catch {
+      case e: Exception => log(s"${e.getClass.getName} - ${e.getMessage}")
+    }
+
+    try {
+      JSON_OBJECT
+      log ("Object")
     } catch {
       case e: Exception => log(s"${e.getClass.getName} - ${e.getMessage}")
     }
