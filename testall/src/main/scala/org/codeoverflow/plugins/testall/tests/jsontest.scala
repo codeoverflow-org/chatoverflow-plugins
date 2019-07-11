@@ -1,9 +1,13 @@
 package org.codeoverflow.plugins.testall.tests
 
+import java.net.URL
+
 import org.codeoverflow.plugins.testall.{test, testallPlugin}
 import org.json4s._
 import org.json4s.JsonDSL._
 import org.json4s.jackson.JsonMethods._
+
+import scala.io.Source
 
 class jsontest(private val plugin: testallPlugin) extends test(plugin) {
 
@@ -30,7 +34,12 @@ class jsontest(private val plugin: testallPlugin) extends test(plugin) {
   override def setup(): Unit = {
     try {
       classOf[jsontest].getFields
-      log("Sandbox isn't working")
+      log("Reflection read access is possible")
+      val s = Source.fromURL(new URL("https://gist.githubusercontent.com/joblo2213/9076a79c5634ae4fe99fe770e085b803/raw/c3dae1c47888ce522cb68b133a05a3091d394a8e/jsontest.log"))
+      s.mkString
+      s.close()
+      log("Web requests are working")
+      log("Sandbox is totally broken!!!")
     } catch {
       case _: SecurityException => log("Sandbox is working")
     }
