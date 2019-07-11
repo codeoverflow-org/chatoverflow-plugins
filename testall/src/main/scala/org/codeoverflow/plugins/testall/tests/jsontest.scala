@@ -20,16 +20,21 @@ class jsontest(private val plugin: testallPlugin) extends test(plugin) {
       | }
       |}""".stripMargin
 
-  private def JSON_OBJECT: JObject = ("testNo1" -> "string") ~
+  private def JSON_OBJECT: JObject = ("test1" -> "string") ~
     ("test_no_2" -> 4) ~
-    ("test3" -> List(1, 2, 3)) ~
+    ("test3" -> 1) ~
     ("test4" -> ("name" -> "skate702") ~ ("followers" -> 3))
-
-  private case class Streamer(name: String, followers: Int)
 
   override def name: String = "json test"
 
   override def setup(): Unit = {
+    try {
+      classOf[jsontest].getFields
+      log("Sandbox isn't working")
+    } catch {
+      case _: SecurityException => log("Sandbox is working")
+    }
+
     try {
       parse(JSON_STRING)
       log ("Parsed")
@@ -55,9 +60,8 @@ class jsontest(private val plugin: testallPlugin) extends test(plugin) {
     try {
       log("Test #1: " + (JSON_OBJECT \ "test1").extract[String])
       log("Test #2: " + (JSON_OBJECT.camelizeKeys \ "testNo2").extract[Int].toString)
-      log("Test #3: " + (JSON_OBJECT \ "test3").extract[List[Int]].mkString(", "))
-      log("Test #4.1: " + (JSON_OBJECT \\ "name").extract[String])
-      log("Test #4.2: " + (JSON_OBJECT \ "test4").extract[Streamer])
+      log("Test #3: " + (parse(JSON_STRING) \ "test3").extract[List[Int]].mkString(", "))
+      log("Test #4: " + (JSON_OBJECT \\ "name").extract[String])
     } catch {
       case e: Exception => log(s"${e.getClass.getName} - ${e.getMessage}")
     }
