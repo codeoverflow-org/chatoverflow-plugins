@@ -1,7 +1,7 @@
 package org.codeoverflow.plugins.testall
 
 import org.codeoverflow.chatoverflow.api.plugin.{PluginImpl, PluginManager}
-import org.codeoverflow.plugins.testall.tests.{discordtest, filetest, serialtest, tipeeestreamtest, twitchtest}
+import org.codeoverflow.plugins.testall.tests.{discordtest, filetest, rcontest, serialtest, tipeeestreamtest, twitchtest}
 
 
 class testallPlugin(manager: PluginManager) extends PluginImpl(manager) {
@@ -26,6 +26,10 @@ class testallPlugin(manager: PluginManager) extends PluginImpl(manager) {
     ),
     new tipeeestreamtest(this,
       require.input.tipeeeStream("tipeeestreamEvents", "TipeeeStream event input", true)
+    ),
+    new rcontest(this,
+      require.input.rcon("rconIn",  "Remote control (RCON) socket of a gameserver used as input", true),
+      require.output.rcon("rconOut",  "Remote control (RCON) socket of a gameserver used as output", true)
     )
     //Add more tests here!
   )
