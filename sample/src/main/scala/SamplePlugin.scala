@@ -3,7 +3,7 @@ import org.codeoverflow.chatoverflow.api.plugin.{PluginImpl, PluginManager}
 class SamplePlugin(manager: PluginManager) extends PluginImpl(manager) {
 
   // Sample input test requirement
-  private val sampleReq = require.input.sampleInput("sampleReq", "Sample requirement", true)
+  private val sampleReq = require.input.sample("sampleReq")
 
   /**
     * The setup method is executed one, when the plugin is started. Do NOT define your requirements in here!
