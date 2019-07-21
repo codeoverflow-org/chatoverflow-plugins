@@ -1,0 +1,14 @@
+<plugin>
+    <name>sample</name>
+    <author>sebinside</author>
+    <description>Sample plugin for testing purposes.</description>
+    <api>
+        <major>3</major>
+        <minor>0</minor>
+    </api>
+    <version>0.3.0</version>
+    <website>http://codeoverflow.org</website>
+    <sourceRepo>https://github.com/codeoverflow-org/chatoverflow-plugins</sourceRepo>
+    <bugtracker>https://github.com/codeoverflow-org/chatoverflow/issues</bugtracker>
+    <license>EPL-2.0</license>
+</plugin>
