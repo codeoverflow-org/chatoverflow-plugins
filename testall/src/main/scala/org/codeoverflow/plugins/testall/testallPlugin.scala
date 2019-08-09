@@ -1,7 +1,7 @@
 package org.codeoverflow.plugins.testall
 
 import org.codeoverflow.chatoverflow.api.plugin.{PluginImpl, PluginManager}
-import org.codeoverflow.plugins.testall.tests.{discordtest, filetest, serialtest, tipeeestreamtest, twitchtest}
+import org.codeoverflow.plugins.testall.tests._
 
 
 class testallPlugin(manager: PluginManager) extends PluginImpl(manager) {
@@ -26,7 +26,8 @@ class testallPlugin(manager: PluginManager) extends PluginImpl(manager) {
     ),
     new tipeeestreamtest(this,
       require.input.tipeeeStream("tipeeestreamEvents", "TipeeeStream event input", true)
-    )
+    ),
+    new dependencytest(this)
     //Add more tests here!
   )
 
