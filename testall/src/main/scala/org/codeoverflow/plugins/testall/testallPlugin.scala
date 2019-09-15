@@ -27,6 +27,9 @@ class testallPlugin(manager: PluginManager) extends PluginImpl(manager) {
     new tipeeestreamtest(this,
       require.input.tipeeeStream("tipeeestreamEvents", "TipeeeStream event input", true)
     ),
+    new streamelementstest(this,
+      require.input.streamElements("streamElementsEvents", "StreamElements event input", true)
+    ),
     new dependencytest(this)
     //Add more tests here!
   )
