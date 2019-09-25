@@ -13,6 +13,7 @@ class tipeeestreamtest(val plugin: testallPlugin,
     event.get.registerDonationEventHandler(e => log(s"${e.getInfo.getDonor.getDisplayName} donated ${e.getInfo.getFormattedAmount}"))
     event.get.registerFollowEventHandler(e => log(s"${e.getInfo.getFollower.getDisplayName} is now following you"))
     event.get.registerSubscriptionEventHandler(e => log(s"${e.getInfo.getSubscriber.getDisplayName} just subscribed. Streak: ${e.getInfo.getResub}"))
+    event.get.registerCheerEventHandler(e => log(s"${e.getInfo.getCheerer.getDisplayName} just cheered ${e.getInfo.getAmount} bits: ${e.getInfo.getMessage}."))
   }
 
   override def loop(): Unit = {}
