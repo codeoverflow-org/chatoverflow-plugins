@@ -22,10 +22,10 @@ class filetest(val plugin: testallPlugin, val in: Requirement[FileInput], val ou
     log("Testing creation of folder #3")
     log(out.get.createDirectory("ich/bin/ein/folder").toString)
 
-    log("Tesitng if file exists")
+    log("Testing if file exists")
     log(out.get.exists("test.json").toString)
 
-    log("Tesitng if file exists (non existant)")
+    log("Testing if file exists (non existant)")
     log(out.get.exists("test2.json").toString)
 
 
@@ -41,7 +41,7 @@ class filetest(val plugin: testallPlugin, val in: Requirement[FileInput], val ou
         |}
       """.stripMargin, "out.json").toString)
 
-    log("Tesitng if folder exists")
+    log("Testing if folder exists")
     log(out.get.exists("test/").toString)
     log(out.get.exists("test").toString)
 
