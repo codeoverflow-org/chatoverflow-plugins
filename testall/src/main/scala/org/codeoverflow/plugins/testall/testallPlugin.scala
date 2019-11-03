@@ -27,11 +27,14 @@ class testallPlugin(manager: PluginManager) extends PluginImpl(manager) {
     new tipeeestreamtest(this,
       require.input.tipeeeStream("tipeeestreamEvents", "TipeeeStream event input", true)
     ),
-    new dependencytest(this),
+    new streamelementstest(this,
+      require.input.streamElements("streamElementsEvents", "StreamElements event input", true)
+    ),
     new rcontest(this,
       require.input.rcon("rconIn",  "Remote control (RCON) socket of a gameserver used as input", true),
       require.output.rcon("rconOut",  "Remote control (RCON) socket of a gameserver used as output", true)
-    )
+    ),
+    new dependencytest(this)
     //Add more tests here!
   )
 
