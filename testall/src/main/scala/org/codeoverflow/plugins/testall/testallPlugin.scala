@@ -10,7 +10,7 @@ class testallPlugin(manager: PluginManager) extends PluginImpl(manager) {
     new discordtest(this,
       require.input.discordChat("discordIn", "Discord input", true),
       require.output.discordChat("discordOut", "Discord output", true),
-      require.parameter.string("discordChannel", "The id of the channel to which the bot should connect", true)
+      require.parameter.stringParameter("discordChannel", "The id of the channel to which the bot should connect", true)
     ),
     new filetest(this,
       require.input.file("fileIn", "File input", true),
