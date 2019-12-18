@@ -34,6 +34,9 @@ class testallPlugin(manager: PluginManager) extends PluginImpl(manager) {
       require.input.rcon("rconIn",  "Remote control (RCON) socket of a gameserver used as input", true),
       require.output.rcon("rconOut",  "Remote control (RCON) socket of a gameserver used as output", true)
     ),
+    new twittertest(this,
+      require.output.twitterTweet("twitterOut", "Twitter as output", true)
+    ),
     new dependencytest(this)
     //Add more tests here!
   )
