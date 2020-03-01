@@ -10,7 +10,7 @@ import org.codeoverflow.chatoverflow.api.io.parameter.StringParameter
 import org.codeoverflow.chatoverflow.api.plugin.configuration.Requirement
 import org.codeoverflow.plugins.testall.{test, testallPlugin}
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 
 /**
   * Test for the discord service, logs edited and deleted messages, tests sending of messages, embeds and files,
